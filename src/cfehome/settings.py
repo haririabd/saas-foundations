@@ -34,10 +34,6 @@ if DEBUG:
         'localhost',
     ]
 
-print('Host:', ALLOWED_HOSTS)
-print('DEBUG:', DEBUG)
-print('SECRET_KEY:', SECRET_KEY)
-
 # Application definition
 
 INSTALLED_APPS = [
