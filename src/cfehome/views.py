@@ -5,8 +5,12 @@ from visits.models import PageVisit
 this_dir = pathlib.Path(__file__).resolve().parent
 
 def index_view(request, *args, **kwargs):
-    page_title = "Homepage"
-    html_template = "index.html"
+    page_title = 'Homepage'
+    html_template = 'index.html'
+
+    # page visit need to redesign in visits.view so it can be re-use
+    # now, only index view have the page visit counter
+    # need to consider the database size also
     qs = PageVisit.objects.all().count()
     q = PageVisit.objects.filter(path=request.path).count()
 
