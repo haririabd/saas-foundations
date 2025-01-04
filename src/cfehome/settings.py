@@ -146,6 +146,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if ON_RAILWAY:
+    CSRF_TRUSTED_ORIGINS = [
+        'https://*.railway.app',
+        'http://*.railway.app']
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
