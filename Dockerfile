@@ -54,7 +54,7 @@ ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 # run any other commands that do not need the database
 # such as:
 RUN python manage.py migrate
-# RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 # whitenoise -> s3
 
 # set the Django default project name
