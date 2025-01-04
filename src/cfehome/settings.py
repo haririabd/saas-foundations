@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ON_RAILWAY = config('ON_RAILWAY', default=False, cast=bool)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -25,10 +25,13 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', cast=bool)
 
-ALLOWED_HOSTS = [
-    '.railway.app',
-]
-if DEBUG:
+ALLOWED_HOSTS = []
+
+if ON_RAILWAY:
+    ALLOWED_HOSTS += [
+        '.railway.app',
+    ]
+else:
     ALLOWED_HOSTS += [
         '127.0.0.1',
         'localhost',
@@ -52,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',# whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,8 +87,6 @@ WSGI_APPLICATION = 'cfehome.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-ON_RAILWAY = config('ON_RAILWAY', default=False, cast=bool)
 
 if ON_RAILWAY:
     DATABASES = {
@@ -155,6 +157,12 @@ STATICFILES_DIRS = [
 # local cdn --> prod cdn
 STATIC_ROOT = BASE_DIR / 'local-cdn'
 
+# Whitenoise compression support
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
