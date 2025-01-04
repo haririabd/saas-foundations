@@ -1,3 +1,11 @@
+# ignore vendor static files
+src\staticfiles\vendors
+
+# ignore local static files root
+local-cdn/
+
+.DS_Store
+
 # Django #
 *.log
 *.pot
