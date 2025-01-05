@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model #better way to get user for long run
+
+# better way to get user for long run
+User = get_user_model()
 
 # Create your views here.
 def login_view(request):
@@ -20,6 +24,20 @@ def login_view(request):
 
     return render(request, template_name, context)
 
-# def register_view(request):
-#     template_name = 'auth/register.html'
-#     return render(request, template_name, {})
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        # this is how validation is done. in future, django form will take care of this. example only
+        # username_exists = User.objects.filter(username__iexact=username).exists()
+        # email_exists = User.objects.filter(username__iexact=email).exists()
+        
+        # below code is working. disable to prevent new registration
+        # try:
+        #     User.objects.create_user(username, email=email, password=password)
+        # except:
+        #     pass
+    template_name = 'auth/register.html'
+    return render(request, template_name, {})

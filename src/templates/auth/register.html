@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %}
+
+<!-- prettier-ignore -->
+{% block head_title %}{{page_title}} - {{block.super}}{% endblock head_title %}
+<!-- prettier-ignore -->
+{% block content %}
+<h1>{{page_title}}</h1>
+<h2>Welcome! Register Here</h2>
+<form action="/register/" method="post">
+  {% csrf_token %}
+  <input type="text" name="username" placeholder="Enter username" />
+  <input type="password" name="password" placeholder="Enter password" />
+  <input type="email" name="email" placeholder="Enter email" />
+  <button type="submit">Register</button>
+</form>
+<!-- prettier-ignore -->
+{% endblock content %}

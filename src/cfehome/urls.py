@@ -22,6 +22,7 @@ from auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view),
+    path('register/', auth_views.register_view),
     # application path is below
     path('', views.index_view),
     path('about/', views.about_view),
