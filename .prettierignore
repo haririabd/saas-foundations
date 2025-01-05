@@ -1,0 +1,2 @@
+# Ignore a single files:
+src/templates/allauth/layouts/base.html

@@ -67,10 +67,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # my-app
+    # my-apps
     'visits',
     'commando',
+    # third-party apps
+    'allauth_ui', # this needs to be before allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'widget_tweaks', # dependency for allauth ui
+    'slippers', # dependency for allauth ui
 ]
 
 MIDDLEWARE = [
@@ -81,6 +87,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'allauth.account.middleware.AccountMiddleware',# django allauth
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -145,6 +152,25 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# django Allauth config
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION='mandatory'
+ACCOUNT_EMAIL_SUBJECT_PREFIX='[SaaS] '
+ACCOUNT_EMAIL_REQUIRED=True
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# django Allauth config - Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {}
+ALLAUTH_UI_THEME = "retro"
 
 if ON_RAILWAY:
     CSRF_TRUSTED_ORIGINS = [
