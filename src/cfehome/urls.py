@@ -25,8 +25,10 @@ urlpatterns = [
     path('register/', auth_views.register_view),
     
     # application path is below
-    path('', views.index_view, name='index'),
-    path('about/', views.about_view),
+    path('', views.Index, name='index'),
+    path('about/', views.About, name='about'),
+    path('contact/', views.Contact, name='contact'),
+
     
     # third party app url here
     path('accounts/', include('allauth.urls')),

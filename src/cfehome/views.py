@@ -4,7 +4,7 @@ from visits.models import PageVisit
 
 this_dir = pathlib.Path(__file__).resolve().parent
 
-def index_view(request, *args, **kwargs):
+def Index(request, *args, **kwargs):
     page_title = 'Homepage'
     html_template = 'index.html'
 
@@ -22,5 +22,20 @@ def index_view(request, *args, **kwargs):
     PageVisit.objects.create(path=request.path)
     return render(request, html_template, context)
 
-def about_view(request, *args, **kwargs):
-    return index_view(request, *args, **kwargs)
+def About(request, *args, **kwargs):
+    page_title = 'About'
+    html_template = 'about.html'
+
+    context = {
+        "page_title": page_title
+    }
+    return render(request, html_template, context)
+
+def Contact(request, *args, **kwargs):
+    page_title = 'Contact'
+    html_template = 'contact.html'
+
+    context = {
+        "page_title": page_title
+    }
+    return render(request, html_template, context)
