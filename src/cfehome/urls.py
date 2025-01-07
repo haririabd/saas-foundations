@@ -23,9 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view),
     path('register/', auth_views.register_view),
+    
     # application path is below
     path('', views.index_view, name='index'),
     path('about/', views.about_view),
+    
     # third party app url here
     path('accounts/', include('allauth.urls')),
 ]
